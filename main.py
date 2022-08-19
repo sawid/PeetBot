@@ -1,16 +1,21 @@
 import discord
 
-bot = discord.Bot()
+intents = discord.Intents.default()
+intents.message_content = True
 
-@bot.slash_command()
-async def hello(ctx, name: str = None):
-    name = name or ctx.author.name
-    print(ctx)
-    await ctx.respond(f"Hello {name}!")
+client = discord.Client(intents=intents)
 
-@bot.user_command(name="Say Hello")
-async def hi(ctx, user):
-    await ctx.respond(f"{ctx.author.mention} says hello to {user.name}!")
+@client.event
+async def on_ready():
+    print(f'We have logged in as {client.user}')
 
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
 
-bot.run("MTAwOTgzOTUzMjk5ODQwNjIzNA.Gt49Om.mjOL9st0iFsXDSjIelaQQXn9zrs0CZAhniz5tA")
+    if message.content.startswith('$hello'):
+        await message.channel.send('Hello!')
+
+     
+client.run("MTAwOTgzOTUzMjk5ODQwNjIzNA.GYA7gw.isymZ3TxeYIN-C-uTx72APNZRmYZKodxCboy-M")
