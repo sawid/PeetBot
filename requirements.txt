@@ -1,2 +1,2 @@
 py-cord==2.0.1
-pymongo==4.2.0
+pymongo[tls,srv]==4.2.0
