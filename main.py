@@ -1,6 +1,7 @@
 import discord
 from regression import *
 from database import *
+import os
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -41,4 +42,4 @@ async def on_message(message):
         else:
             print("No Response")
      
-client.run("MTAwOTgzOTUzMjk5ODQwNjIzNA.GU-H_c.uwZW7dv_0hGjMWKpIlUqQ5GSP5lKW6ve9LvuD0")
+client.run(os.environ["DISCORD_TOKEN"])
